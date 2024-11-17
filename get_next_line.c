@@ -23,8 +23,8 @@ char	*get_line(char *str)
 		i++;
 	}
 	if (str[i] == '\n')
-		line[i] = '\n';
-	line[++i] = '\0';
+		line[i++] = '\n';
+	line[i] = '\0';
 	return (line);
 }
 
@@ -105,7 +105,7 @@ int	read_file(int fd, char **buffer)
 
 char	*get_next_line(int fd)
 {
-	char	*line;
+	char		*line;
 	static char	*buffer;
 
 	line = NULL;
