@@ -51,12 +51,30 @@ int	ft_strlcat(char *dst, const char *src, int size)
 	return (dst_l + src_l);
 }
 
-char    *ft_strjoin(char const *s1, char const *s2)
+char	*ft_strdup(const char *s)
+{
+	char	*dup;
+	size_t	i;
+
+	dup = (char *)malloc(ft_strlen(s) + 1);
+	if (!dup)
+		return (NULL);
+	i = 0;
+	while (s[i])
+	{
+		dup[i] = s[i];
+		i++;
+	}
+	dup[i] = '\0';
+	return (dup);
+}
+
+char    *ft_strjoin(char *s1, char const *s2)
 {
 	char    *str;
 
-	if (!s1 || !s2)
-		return (NULL);
+	if (!s1)
+		return (ft_strdup(s2));
 	str = (char *)malloc(ft_strlen(s1) + ft_strlen(s2) + 1);
 	if (!str)
 		return (NULL);
