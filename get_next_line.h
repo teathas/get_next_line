@@ -13,5 +13,6 @@
 char	*get_next_line(int fd);
 char	*ft_strjoin(char *s1, char const *s2);
 int	ft_strlen(const char *s);
+char	*ft_strdup(const char *s);
 char	*str_append(char *dst, const char *s1, const char *s2);
 #endif

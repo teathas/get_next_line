@@ -58,14 +58,17 @@ char    *ft_strjoin(char *s1, char const *s2)
 {
 	char    *str;
 
-	if (!s1 && !s2)
-		return (NULL);
 	if (!s1)
 		return (ft_strdup(s2));
 	str = (char *)malloc(ft_strlen(s1) + ft_strlen(s2) + 1);
 	if (!str)
+	{
+		free(s1);
+		s1 = NULL;
 		return (NULL);
+	}
 	str = str_append(str, s1, s2);
 	free(s1);
+	s1 = NULL;
 	return (str);
 }
