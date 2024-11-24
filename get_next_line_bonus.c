@@ -112,23 +112,23 @@ int	read_file(int fd, char **buffer)
 char	*get_next_line(int fd)
 {
 	char		*line;
-	static char	*buffer;
+	static char	*buffer[1024];
 
 	line = NULL;
-	if (fd < 0)
+	if (fd < 0 && BUFFER_SIZE < 0)
 		return (NULL);
-	if (!read_file(fd, &buffer))
+	if (!read_file(fd, &buffer[fd]))
 	{
 		free(buffer);
 		buffer = NULL;
 		return (NULL);
 	}
-	if (buffer != NULL)
+	if (buffer[fd] != NULL)
 	{
-		line = ft_get_line(buffer);
-		buffer = ft_get_remain(buffer);
-		if (!buffer)
-			free(buffer);
+		line = ft_get_line(buffer[fd]);
+		buffer[fd] = ft_get_remain(buffer[fd]);
+		if (!buffer[fd])
+			free(buffer[fd]);
 	}
 	return (line);
 }
