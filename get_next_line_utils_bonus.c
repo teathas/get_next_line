@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   get_next_line_utils_bonus.c                        :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: aberkass <aberkass@student.1337.ma>        +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2024/11/25 11:03:56 by aberkass          #+#    #+#             */
+/*   Updated: 2024/11/25 13:40:02 by aberkass         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "get_next_line.h"
 
 int	ft_strlen(const char *s)
@@ -54,9 +66,9 @@ char	*ft_strdup(const char *s)
 	return (dup);
 }
 
-char    *ft_strjoin(char *s1, char const *s2)
+char	*ft_strjoin(char *s1, char const *s2)
 {
-	char    *str;
+	char	*str;
 
 	if (!s1)
 		return (ft_strdup(s2));

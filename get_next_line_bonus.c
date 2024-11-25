@@ -1,9 +1,21 @@
-#include "get_next_line.h"
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   get_next_line_bonus.c                              :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: aberkass <aberkass@student.1337.ma>        +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2024/11/25 11:03:40 by aberkass          #+#    #+#             */
+/*   Updated: 2024/11/25 14:41:33 by aberkass         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
+#include "get_next_line_bonus.h"
 
 char	*ft_get_line(char *str)
 {
-	int	i;
-	int	size;
+	int		i;
+	int		size;
 	char	*line;
 
 	size = 0;
@@ -30,8 +42,8 @@ char	*ft_get_line(char *str)
 
 char	*ft_get_remain(char	*str)
 {
-	int	i;
-	int	j;
+	int		i;
+	int		j;
 	char	*remain;
 
 	i = 0;
@@ -48,11 +60,7 @@ char	*ft_get_remain(char	*str)
 	}
 	remain = malloc(ft_strlen(&str[i]) + 1);
 	if (!remain)
-	{
-		free(str);
-		str = NULL;
 		return (NULL);
-	}
 	while (str[i])
 		remain[j++] = str[i++];
 	remain[j] = '\0';
@@ -80,7 +88,7 @@ int	nl_check(char *str)
 int	read_file(int fd, char **buffer)
 {
 	char	*buff;
-	int	readed;
+	int		readed;
 
 	readed = 1;
 	buff = malloc(BUFFER_SIZE + 1);
@@ -94,15 +102,12 @@ int	read_file(int fd, char **buffer)
 			free(buff);
 			return (0);
 		}
-		else if (readed > 0)
+		buff[readed] = '\0';
+		*buffer = ft_strjoin(*buffer, buff);
+		if (*buffer == NULL)
 		{
-			buff[readed] = '\0';
-			*buffer = ft_strjoin(*buffer, buff);
-			if (*buffer == NULL)
-			{
-				free(buff);
-				return (0);
-			}
+			free(buff);
+			return (0);
 		}
 	}
 	free(buff);
@@ -115,19 +120,19 @@ char	*get_next_line(int fd)
 	static char	*buffer[1024];
 
 	line = NULL;
-	if (fd < 0 && BUFFER_SIZE < 0)
+	if (fd < 0 || BUFFER_SIZE <= 0)
 		return (NULL);
 	if (!read_file(fd, &buffer[fd]))
 	{
-		free(buffer);
-		buffer = NULL;
+		free(buffer[fd]);
+		buffer[fd] = NULL;
 		return (NULL);
 	}
 	if (buffer[fd] != NULL)
 	{
 		line = ft_get_line(buffer[fd]);
 		buffer[fd] = ft_get_remain(buffer[fd]);
-		if (!buffer[fd])
+		if (buffer[fd] == NULL)
 			free(buffer[fd]);
 	}
 	return (line);
