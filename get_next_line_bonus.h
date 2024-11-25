@@ -15,6 +15,9 @@
 # ifndef BUFFER_SIZE
 #  define BUFFER_SIZE 42
 # endif
+# ifndef FD_SETSIZE
+#  define FD_SETSIZE 1024
+# endif
 
 # include <stdlib.h>
 # include <stdio.h>

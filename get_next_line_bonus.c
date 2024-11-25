@@ -117,10 +117,10 @@ int	read_file(int fd, char **buffer)
 char	*get_next_line(int fd)
 {
 	char		*line;
-	static char	*buffer[1024];
+	static char	*buffer[FD_SETSIZE];
 
 	line = NULL;
-	if (fd < 0 || BUFFER_SIZE <= 0)
+	if (fd < 0 || fd >= FD_SETSIZE || BUFFER_SIZE <= 0)
 		return (NULL);
 	if (!read_file(fd, &buffer[fd]))
 	{
